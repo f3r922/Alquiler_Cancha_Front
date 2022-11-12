@@ -5,7 +5,7 @@ import  { Route, Routes } from "react-router-dom";
 import  {HomePage}  from './pages/HomePage';
 import Canchas from './pages/Canchas';
 import Deportes from './pages/Deportes';
-import Complejo from './pages/Complejo';
+import Complejos from './pages/Complejos';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Route element={<BarraNavegacion />}>
           <Route path="" element={<HomePage />} />
           <Route path="/cancha" element={<Canchas />} />
-          <Route path="/complejo" element={<Complejo />} />
+          <Route path="/complejo" element={<Complejos />} />
           <Route path="/deporte" element={<Deportes />} />
         </Route>
         

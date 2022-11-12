@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {Table, Container, Button, Modal, Form} from 'react-bootstrap';
 
-const Complejo = ()=>{
+const Complejos = ()=>{
     const [complejos, setComplejos] = useState([]);
 
     useEffect(() => {
@@ -46,4 +46,4 @@ return(
     )
 }
 
-export default Complejo;
+export default Complejos;

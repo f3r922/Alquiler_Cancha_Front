@@ -29,8 +29,9 @@ function BarraNavegacion() {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
                   <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="/cancha">Cancha</Nav.Link>
-                  <Nav.Link href="/deporte">Deporte</Nav.Link>
+                  <Nav.Link href="/cancha">Canchas</Nav.Link>
+                  <Nav.Link href="/deporte">Deportes</Nav.Link>
+                  <Nav.Link href="/complejo">Complejos</Nav.Link>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
