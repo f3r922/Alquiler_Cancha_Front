@@ -106,9 +106,15 @@ const FormCancha = (props)=> {
 
     return (
 
-        <Modal show={show} onHide={close}>
+        <Modal show={show} onHide={() => {
+                                    close()
+                                    setFormErrors({})
+                                    setIsSubmit(false)
+                                    }
+                                }
+        >
                 <Modal.Header closeButton>
-                    <Modal.Title>Nueva Cancha</Modal.Title>
+                    <Modal.Title>{modoAgregar? "Nueva Cancha" : "Editar Cancha"} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 

@@ -1,42 +1,46 @@
 
-import Container from 'react-bootstrap/Container';
-
+import {Col, Container, Row} from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
 import { Outlet } from "react-router-dom";
-import Offcanvas from 'react-bootstrap/Offcanvas';
+
 
 
 function BarraNavegacion() {
-  const expand = false;
+
   return (
-    <>
-        <Navbar key={expand} bg="primary" expand={expand} className="mb-3" variant="dark">
-          <Container fluid>
-            <Navbar.Brand href="/">Alquiler Canchas</Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-            <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-${expand}`}
-              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
-              placement="end"
-            >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Offcanvas
-                </Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="/">Home</Nav.Link>
-                  <Nav.Link href="/cancha">Canchas</Nav.Link>
-                  <Nav.Link href="/deporte">Deportes</Nav.Link>
-                  <Nav.Link href="/complejo">Complejos</Nav.Link>
-                </Nav>
-              </Offcanvas.Body>
-            </Navbar.Offcanvas>
-          </Container>
-        </Navbar>
+    <>  
+      <Navbar bg="primary" variant="dark">
+        <Container>
+      
+            <Col>
+              <Navbar.Brand  className="flex" href="#home">Navbar</Navbar.Brand>
+            </Col>
+            <Col>
+              <Nav className="justify-content-center">
+                  <div className="vr" />
+                  <Nav.Link href="/cancha" style={{margin:'5px'}} >Canchas</Nav.Link>
+                  <div className="vr" />
+                  <Nav.Link href="/complejo" style={{margin:'5px'}}>Complejos</Nav.Link>
+                  <div className="vr" />
+                  <Nav.Link href="/deporte" style={{margin:'5px'}}>Deportes</Nav.Link>
+                  <div className="vr" />
+                  <Nav.Link  style={{margin:'5px'}}>Personas</Nav.Link>
+                  <div className="vr" />
+                  <Nav.Link style={{margin:'5px'}}>Alquiler</Nav.Link>
+                  <div className="vr" />
+              </Nav>
+            </Col>
+            <Col>
+              <Nav className="justify-content-end">
+                <Navbar.Text>
+                  Signed in as: <a href="#login">Mark Otto</a>
+                </Navbar.Text>
+              </Nav>
+            </Col>
+       
+        </Container>
+      </Navbar>
     
       <Outlet />
     </>

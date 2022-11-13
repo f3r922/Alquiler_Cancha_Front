@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Button, Table} from 'react-bootstrap';
+import { Button, Table, Container} from 'react-bootstrap';
 import FormCancha from "../forms/FormCancha";
 import FilaCancha from "../filas/FilaCancha";
 
 
 
-const Cancha = ()=>{
+const Canchas = ()=>{
     
     const valorInicial = {
         complejo: {denominacion:"Elegir..."},
@@ -133,7 +133,7 @@ const Cancha = ()=>{
     
     return (
       <>
-            <div className='d-flex justify-content-center mt-3 mb-2'>
+            <div className='d-flex justify-content-center mt-5 mb-5'>
                 <Button variant="primary" onClick={handleShow}>
                 Agregar Cancha
                 </Button>
@@ -148,8 +148,8 @@ const Cancha = ()=>{
             onEditar= {editarCancha}
             />
 
-            <h2>Lista de Canchas</h2>
-                <Table striped bordered hover>
+              <Container >
+                <Table striped bordered hover className='canchas-lista-contenedor'>
                     <thead>
                     <tr>
                         <th>#</th>
@@ -183,7 +183,8 @@ const Cancha = ()=>{
                     }
                     </tbody>
                 </Table>
+              </Container >
         </>
     )
 }
-export default Cancha;
+export default Canchas;

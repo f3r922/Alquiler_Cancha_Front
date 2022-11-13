@@ -21,10 +21,7 @@ const Deportes = ()=>{
     const [deporteElegido, setDeporteElegido] = useState(deporteInicial);
     
 
-    const handleShow = () => setShow(true);
-    const handleClose = () => {
-      setDeporteElegido(deporteInicial);
-      setShow(false);}
+ 
 
 
     useEffect(() => {
@@ -95,6 +92,12 @@ const Deportes = ()=>{
       setModoAgregar(true);
       setDeporteElegido(deporteInicial);
     };
+
+    const handleShow = () => setShow(true);
+    const handleClose = () => {
+      setDeporteElegido(deporteInicial);
+      setModoAgregar(true);
+      setShow(false);}
   
     return(
     <> 
@@ -113,8 +116,8 @@ const Deportes = ()=>{
         onEditar= {editarDeporte}
       />
 
-      <Container >
-          <Table className='deportes-lista-contenedor'  striped bordered hover>
+        <Container >
+          <Table className='deportes-lista-contenedor '  striped bordered hover>
             <thead>
               <tr>
                 <th >#</th>
