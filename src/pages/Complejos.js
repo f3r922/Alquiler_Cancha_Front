@@ -16,8 +16,9 @@ const Complejos = ()=>{
     },[]);
 
 return(
-        <Table>
-          <thead>
+      <Container>
+        <Table striped bordered hover className='canchas-lista-contenedor'>
+          <thead style={{backgroundColor:'gray'}}>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Denominación</th>
@@ -43,6 +44,7 @@ return(
             }
           </tbody>
         </Table>
+      </Container>
     )
 }
 

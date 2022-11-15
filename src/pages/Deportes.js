@@ -118,7 +118,7 @@ const Deportes = ()=>{
 
         <Container >
           <Table className='deportes-lista-contenedor '  striped bordered hover>
-            <thead>
+            <thead style={{backgroundColor:'gray'}}>
               <tr>
                 <th >#</th>
                 <th >Deporte</th>

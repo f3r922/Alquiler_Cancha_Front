@@ -151,7 +151,7 @@ const Canchas = ()=>{
               <Container >
                 <Table striped bordered hover className='canchas-lista-contenedor'>
                     <thead>
-                    <tr>
+                    <tr style={{backgroundColor:'gray'}}>
                         <th>#</th>
                         <th>Descripcion</th>
                         <th>Complejo</th>
