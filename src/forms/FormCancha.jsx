@@ -75,7 +75,7 @@ const FormCancha = (props)=> {
       const validate = (formValues) => {
         console.log(formValues.deporteId);
         const errors = {};
-        const regex = /^[a-zA-Z]+[a-zA-Z]+$/g;
+        const regex = /(?:(\w+-?\w+)) (?:(\w+))(?: (\w+))?$/g;
         if(!formValues.deporteId){
           errors.deporteId = "Deporte es requerido"
         }
