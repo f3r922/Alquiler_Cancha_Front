@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { Button, Modal, Form} from 'react-bootstrap';
 
-const FormComplejo = (props)=>{
+const FormPersona = (props)=>{
     const {show, close, modoAgregar, valor, onAgregar, onEditar } = props;
 
     const [formValues, setFormValues] = useState(valor);
@@ -35,7 +35,6 @@ const FormComplejo = (props)=>{
             onEditar(formValues);
             setFormValues(valor);
           };
-        
     }
 
     const handleChange = (e)=> {
@@ -57,43 +56,35 @@ const FormComplejo = (props)=>{
 
     const validate = (values) => {
       const errors = {};
+      const regexNombre = /^(([a-zA-Z\u00C0-\u00FF]{2,})+( [a-zA-Z\u00C0-\u00FF]+)+)$/gm;   // caracteres y acentos
+      const regexApellido = /^(([a-zA-Z\u00C0-\u00FF]{2,})+( [a-zA-Z\u00C0-\u00FF]+)+)$/gm;
       const regexDni= /^[0-9]+$/gm; //Numeros
-      const regexDenominacion = /(?:(\w+-?\w+)) (?:(\w+))(?: (\w+))?$/g;
-      const regexDomiciio = /(?:(\w+-?\w+)) (?:(\w+))(?: (\w+))?$/g; 
-      const regexEncargado = /^(([a-zA-Z\u00C0-\u00FF]{2,})+( [a-zA-Z\u00C0-\u00FF]+)+)$/gm;   // caracteres y acentos
-      if(!values.denominacion){
-        errors.denominacion = "Complejo es Requerido"
-        
-      }else if (!regexDenominacion.test(values.denominacion)){
-        errors.denominacion = "Ingrese un nombre correcto"
+      const regexTelefono = /^[0-9]+$/gm;
+
+      if(!values.nombre){
+        errors.nombre = "Nombre es Requerido"
+      }else if (!regexNombre.test(values.nombre)){
+        errors.nombre = "Ingrese un nombre correcto"
       }
 
       if(!values.dni){
         errors.dni = "DNI es requerido"
-        
       }else if (!regexDni.test(values.dni)){
-        errors.dni = "Ingrese un dni correcto"
+        errors.dni = "Ingrese un dni correcto (solo números)"
       }
 
-      if(!values.domicilio){
-        errors.domicilio = "Dirección es requerida"
-        
-      }else if (!regexDomiciio.test(values.domicilio)){
-        errors.domicilio = "Ingresa una dirección correctamente"
+      if(!values.apellido){
+        errors.apellido = "Apellido es requerido"
+      }else if (!regexApellido.test(values.apellido)){
+        errors.apellido = "Ingresa un apellido correctamente"
       }
 
-      if(!values.encargado){
-        errors.encargado = "Encargado es requerido"
-        
-      }else if (!regexEncargado.test(values.encargado)){
-        errors.encargado = "ingrese datos correctamente"
+      if(!values.telefono){
+        errors.telefono = "Teléfono es requerido"
+      }else if (!regexTelefono.test(values.telefono)){
+        errors.telefono = "Ingrese un teléfono correctamente (solo números)"
       }
-
-      if(!values.fechaAlta){
-        errors.fechaAlta = "Fecha de Alta es requerida"
-        
-      }
-
+   
       return errors;
     };
     
@@ -105,47 +96,34 @@ const FormComplejo = (props)=>{
                                         }}
       >
         <Modal.Header closeButton>
-          <Modal.Title>{modoAgregar? "Nuevo Complejo" : "Editar Complejo"} </Modal.Title>
+          <Modal.Title>{modoAgregar? "Nueva Persona" : "Editar Persona"} </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Denominación</Form.Label>
+              <Form.Label>Nombre</Form.Label>
               <Form.Control
-                value = {`${formValues.denominacion}`}
+                value = {`${formValues.nombre}`}
                 type= "text"
-                name="denominacion"
-                placeholder="complejo ..."
+                name="nombre"
+                placeholder="ej: Juan ..."
                 autoFocus
                 onChange={handleChange}
               />
-              <span style={{color: "red"}}>{formErrors.denominacion}</span>
+              <span style={{color: "red"}}>{formErrors.nombre}</span>
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Dirección del Complejo</Form.Label>
+              <Form.Label>Apellido</Form.Label>
               <Form.Control
-                value = {`${formValues.domicilio}`}
+                value = {`${formValues.apellido}`}
                 type= "text"
-                name="domicilio"
-                placeholder="ej: av. peron s/n"
+                name="apellido"
+                placeholder="ej: Gonzalez ..."
                 autoFocus
                 onChange={handleChange}
               />
-              <span style={{color: "red"}}>{formErrors.domicilio}</span>
-            </Form.Group>
-            
-            <Form.Group className="mb-3">
-              <Form.Label>Encargado</Form.Label>
-              <Form.Control
-                value = {`${formValues.encargado}`}
-                type= "text"
-                name="encargado"
-                placeholder="ej. pedrito"
-                autoFocus
-                onChange={handleChange}
-              />
-              <span style={{color: "red"}}>{formErrors.encargado}</span>
+              <span style={{color: "red"}}>{formErrors.apellido}</span>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -162,16 +140,17 @@ const FormComplejo = (props)=>{
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Fecha de Alta</Form.Label>
+              <Form.Label>Teléfono</Form.Label>
               <Form.Control
-                value = {`${formValues.fechaAlta}`}
-                type= "date"
-                name="fechaAlta"
+                value = {`${formValues.telefono}`}
+                type= "tel"
+                name="telefono"
+                placeholder="..."
                 autoFocus
                 onChange={handleChange}
                 
               />
-              <span style={{color: "red"}}>{formErrors.fechaAlta}</span>
+              <span style={{color: "red"}}>{formErrors.telefono}</span>
             </Form.Group>
             
             <Button variant="primary" type="submit">Aceptar</Button>
@@ -182,4 +161,4 @@ const FormComplejo = (props)=>{
     )
 } 
 
-export default FormComplejo;
+export default FormPersona;

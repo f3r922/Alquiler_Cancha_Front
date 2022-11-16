@@ -31,3 +31,22 @@ html, body{
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#main-container {
+  place-items: center center;
+}
+
+#sign-in-form {
+  max-width: 330px;
+}
+
+.logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  
+}
+
+.form-control:focus {
+  z-index: 5;
+}

@@ -1,0 +1,9 @@
+export const LOGIN = '/login';
+export const LOGOUT = '/logout';
+export const PRIVATE = '/';
+export const HOME = '/';
+export const CANCHAS = '/cancha';
+export const COMPLEJOS = '/complejo';
+export const DEPORTES = '/deporte';
+export const ALQUILERES = '/alquiler';
+export const PERSONAS = '/persona';
