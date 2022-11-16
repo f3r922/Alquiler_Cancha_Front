@@ -33,7 +33,7 @@ const Complejos = ()=>{
           });
         });
     
-    },[]);
+    },[open]);
 
     const agregarComplejo = async (complejo)=>{
         
@@ -65,7 +65,7 @@ const Complejos = ()=>{
   const editarComplejo= async (complejoEditado) => { 
     
     console.log(complejoEditado)
-      const respuesta = await fetch("http://localhost:4000/deportes/" + complejoEditado.id, {
+      const respuesta = await fetch("http://localhost:4000/complejos/" + complejoEditado.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
