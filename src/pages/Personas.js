@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {Table, Container, Button} from 'react-bootstrap';
 import FormPersona from "../forms/FormPersona";
-import FilaPersona from "../filas/FilaDeporte";
+import FilaPersona from "../filas/FilaPersona";
 
 const Personas = ()=>{
 
@@ -130,6 +130,7 @@ return(
               <th scope="col">Apellido</th>
               <th scope="col">DNI</th>
               <th scope="col">Teléfono</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
