@@ -62,11 +62,41 @@ const Complejos = ()=>{
       setComplejoElegido(complejoInicial);
   }
 
-  const editarComplejo= ()=> { 
-
+  const editarComplejo= async (complejoEditado) => { 
+    
+    console.log(complejoEditado)
+      const respuesta = await fetch("http://localhost:4000/deportes/" + complejoEditado.id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          denominacion: complejoEditado.denominacion,
+          dni: complejoEditado.dni,
+          domicilio: complejoEditado.domicilio,
+          encargado: complejoEditado.encargado,
+          fechaAlta: complejoEditado.fechaAlta
+        }),
+      });
+      if (respuesta.ok) {
+        setOpen(!open);
+        } else {
+        console.error("Fallo al editar complejo");}
+      setShow(false);
+      setModoAgregar(true);
+      setComplejoElegido(complejoInicial);
   }
 
-  const eliminarComplejo= () => {
+  const eliminarComplejo= async (complejo) => {
+        console.log(complejo)
+        const respuesta = await fetch("http://localhost:4000/complejos/" + complejo.id, {
+          method: "DELETE",
+        });
+        if (respuesta.ok) {
+          setOpen(!open);
+        } else {
+          console.error("error al eliminar");
+        }
 
   }
 
