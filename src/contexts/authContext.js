@@ -11,13 +11,13 @@ export function AuthContextProvider( {children} ){
     const [isAuthenticated, setIsAuthenticated] = useState(window.localStorage.getItem(MY_AUTH_APP) ?? false);
     
     const login = useCallback( async function(usuario, password){
-        window.localStorage.setItem(MY_AUTH_APP, true);
+        //window.localStorage.setItem(MY_AUTH_APP, true);
         //setIsAuthenticated(true);
         const response = await axios.post("http://localhost:4000/auth/login", {
         usuario,
         password
         });
-
+        console.log(response)
         if (response.data.token) {
             window.localStorage.setItem(MY_AUTH_APP, true);
             setIsAuthenticated(response.data);

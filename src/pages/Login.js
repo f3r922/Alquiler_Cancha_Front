@@ -6,16 +6,22 @@ import imagen from "../imagen/imagen.png"
 export default function Login(){
 
     const {login} = useAuthContext();
-    const [magicWord, setMagicWord] = useState('');
+    const [magicWord, setMagicWord] = useState(null);
+
 
     function handleInputChange(e) {
         const {name, value} = e.target;
         setMagicWord({...magicWord,[name]: value});
+        console.log(magicWord);
     }
 
     const handleSubmit = (e) => {
+        if(magicWord === null){
+            console.log("error");
+        }else{
+            login(magicWord.usuario, magicWord.password);
+        }
         e.preventDefault();
-        login(magicWord.usuario, magicWord.password);
     }
 
     return( 
