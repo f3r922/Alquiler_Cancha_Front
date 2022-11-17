@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 
-const FilaCancha = (props)=> {
-    const {onEditar, onEliminar, cancha, index} = props;
+const FilaAlquiler = (props)=> {
+    const {onEditar, onEliminar, alquiler, index} = props;
 
     const [show, setShow] = useState(false);
 
@@ -21,12 +21,12 @@ const FilaCancha = (props)=> {
                         <FontAwesomeIcon icon={faCircleExclamation}  style={{color:"red"}} size='lg'/>
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Estas seguro que deseas eliminar <strong>{cancha.descripcion}</strong>?</Modal.Body>
+                <Modal.Body>Estas seguro que deseas eliminar el <strong>alquiler</strong>?</Modal.Body>
                 <Modal.Footer style={{alignItems: "center", justifyContent:'center'}}>
                     <Button title='Cancelar' variant="outline-secondary" size='lg' onClick={handleClose}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </Button>
-                    <Button title='Aceptar' variant="outline-success" size='lg' onClick={() => {handleClose(); onEliminar(cancha)}}>
+                    <Button title='Aceptar' variant="outline-success" size='lg' onClick={() => {handleClose(); onEliminar(alquiler)}}>
                         <FontAwesomeIcon icon={faCircleCheck} />
                     </Button>
                 </Modal.Footer>
@@ -36,37 +36,25 @@ const FilaCancha = (props)=> {
                     {index + 1}
                 </td>
                 <td >
-                    <p>{cancha.descripcion}</p> 
+                    <p>{alquiler.cancha.descripcion}</p> 
                 </td>
                 <td>
-                    {cancha.complejo.denominacion}
+                    {alquiler.persona.nombre} {alquiler.persona.apellido}
                 </td>
                 <td>
-                    {cancha.deporte.descripcion}
+                    {alquiler.hora_inicio}
                 </td>
                 <td>
-                    {cancha.estado? <span className="badge bg-success">Activa</span>:<span className="badge bg-danger">Inactiva</span>}
+                    {alquiler.hora_fin}
                 </td>
                 <td>
-                    {cancha.hora_inicio}
+                    {alquiler.estado? <span className="badge bg-danger">Pagado</span>:<span className="badge bg-success">Reservado</span>}
                 </td>
                 <td>
-                    {cancha.hora_fin}
+                    {alquiler.fecha}
                 </td>
                 <td>
-                    {cancha.tipoPisp}
-                </td>
-                <td>
-                    {cancha.iluminacion? "SI":"NO"}
-                </td>
-                <td>
-                    {cancha.techada? "SI":"NO"}
-                </td>
-                <td>
-                    {"$"}{cancha.precioh}
-                </td>
-                <td>
-                    <Button onClick={() => onEditar(cancha)} variant="outline-success" title="Editar"><FontAwesomeIcon icon={faPenAlt} /></Button>
+                    <Button onClick={() => onEditar(alquiler)} variant="outline-success" title="Editar"><FontAwesomeIcon icon={faPenAlt} /></Button>
                     {" "}
                     <Button  variant="outline-danger" title="Eliminar" onClick={handleShow}><FontAwesomeIcon icon={faTrash} /></Button>
                 </td>
@@ -75,4 +63,4 @@ const FilaCancha = (props)=> {
     )
 }
 
-export default FilaCancha;
+export default FilaAlquiler;
