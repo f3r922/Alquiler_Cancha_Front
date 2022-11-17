@@ -117,7 +117,7 @@ const Canchas = ()=>{
           console.log('passs');
           setOpen(!open);
         } else {
-            console.error("error al eliminar cancha");
+            console.error("error al editar cancha");
         };
       setShow(false);
       setModoAgregar(true);
