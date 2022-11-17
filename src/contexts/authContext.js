@@ -7,12 +7,12 @@ const MY_AUTH_APP = 'MY_AUTH_APP_1'
 export const AuthContext = createContext();
 
 export function AuthContextProvider( {children} ){
-    //const [isAuthenticated, setIsAuthenticated] = useState(window.localStorage.getItem(MY_AUTH_APP) ?? false);
+    
     const [isAuthenticated, setIsAuthenticated] = useState(window.localStorage.getItem(MY_AUTH_APP) ?? false);
     
     const login = useCallback( async function(usuario, password){
-        //window.localStorage.setItem(MY_AUTH_APP, true);
-        //setIsAuthenticated(true);
+     
+    
         const response = await axios.post("http://localhost:4000/auth/login", {
         usuario,
         password
@@ -27,7 +27,7 @@ export function AuthContextProvider( {children} ){
 
     const logout = useCallback(function(){
         window.localStorage.removeItem(MY_AUTH_APP);
-       //setIsAuthenticated(false);
+    
         setIsAuthenticated(null);
     }, [])
 

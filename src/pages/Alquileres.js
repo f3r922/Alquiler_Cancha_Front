@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Button, Table, Container} from 'react-bootstrap';
 import FormAlquiler from "../forms/FormAlquiler";
 import FilaAlquiler from "../filas/FilaAlquiler";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -18,6 +20,10 @@ const Alquileres = ()=>{
         estado: false
     };
 
+    //en realcion a la busqueda
+    const [tablaAlquileres, setTablaAlquileres]= useState([]);
+    const [busqueda, setBusqueda]= useState("");
+    //    
     const [show, setShow] = useState(false);
     
     const [modoAgregar, setModoAgregar] = useState(true);
@@ -36,6 +42,7 @@ const Alquileres = ()=>{
           respuesta.json().then((getAlquileres) => {
   
             setAlquileres([...getAlquileres]);
+            setTablaAlquileres([...getAlquileres]);
             console.log(getAlquileres);
 
           });
@@ -112,6 +119,18 @@ const Alquileres = ()=>{
       setAlquilerElegido(valorInicial);
     }
 
+    const filtrar=(terminoBusqueda)=>{
+      const resultadosBusqueda = tablaAlquileres.filter((elemento) => {
+        if(elemento.persona.apellido.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+        || elemento.persona.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+        || elemento.hora_inicio.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+        ){
+          return elemento;
+        }
+      });
+      setAlquileres(resultadosBusqueda);
+    }
+
     const handleShow = () => setShow(true);
 
     const handleClose = () => {
@@ -119,12 +138,29 @@ const Alquileres = ()=>{
       setModoAgregar(true);
       setShow(false)};
     
+    const handleChange= (e) =>{
+        setBusqueda(e.target.value);
+        filtrar(e.target.value);
+    }
+    
     return (
       <>
             <div className='d-flex justify-content-center mt-5 mb-5'>
                 <Button variant="primary" onClick={handleShow}>
                 Agregar Alquiler
                 </Button>
+            </div>
+
+            <div className="containerInput">
+              <input
+                className="form-control inputBuscar"
+                value={busqueda}
+                placeholder="Búsqueda por Apellido, Nombre, Hora de inicio"
+                onChange={handleChange}
+              />
+              <button className="btn btn-success">
+                <FontAwesomeIcon icon={faSearch}/>
+              </button>
             </div>
             
             <FormAlquiler

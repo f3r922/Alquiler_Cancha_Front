@@ -14,11 +14,12 @@
 }
 .canchas-lista-contenedor {
   max-width: 1200px;
-  margin: 50px 20px 0px 0px;
+  margin: auto;
   text-align: center;
   justify-content: center;
   align-items: center;
   background: none;
+  overflow: scroll;
 }
 
 html, body{  
@@ -57,4 +58,17 @@ html, body{
   justify-content: center;
   margin: 50px;
   display: flex;
+}
+
+.containerInput{
+  margin-right: 10px;
+  align-items: center;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 25px;
+}
+
+.inputBuscar{
+  width: 28% !important;
 }
