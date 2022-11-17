@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import {Table, Container, Button} from 'react-bootstrap';
 import FormPersona from "../forms/FormPersona";
 import FilaPersona from "../filas/FilaPersona";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Personas = ()=>{
 
@@ -12,7 +14,11 @@ const Personas = ()=>{
       telefono: "",  
     }
 
-
+    //en realcion a la busqueda
+    const [tablaPersonas, setTablaPersonas]= useState([]);
+    const [busqueda, setBusqueda]= useState("");
+    //
+    
     const [personas, setPersonas] = useState([]);
 
     const [show, setShow] = useState(false);
@@ -29,6 +35,7 @@ const Personas = ()=>{
             console.log(getPersonas);
            
             setPersonas([...getPersonas]);
+            setTablaPersonas([...getPersonas]);
           });
         });
     
@@ -97,12 +104,29 @@ const Personas = ()=>{
 
   }
 
+  const filtrar=(terminoBusqueda)=>{
+    const resultadosBusqueda = tablaPersonas.filter((elemento) => {
+      if(elemento.apellido.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      || elemento.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ){
+        return elemento;
+      }
+    });
+    setPersonas(resultadosBusqueda);
+  }
+
+  //eventos al manipular el modal
   const handleShow = () => setShow(true);
   const handleClose = () => {
     setPersonaElegida(personaInicial);
       setModoAgregar(true);
       setShow(false);}
-
+  
+  const handleChange=e=>{
+        setBusqueda(e.target.value);
+        filtrar(e.target.value);
+      }
+      
 
 return(
   <> 
@@ -110,6 +134,18 @@ return(
         <Button variant="primary" onClick={handleShow}>
           Agregar Persona
         </Button>
+      </div>
+
+      <div className="containerInput">
+        <input
+          className="form-control inputBuscar"
+          value={busqueda}
+          placeholder="Búsqueda por Apellido o Nombre"
+          onChange={handleChange}
+        />
+        <button className="btn btn-success">
+          <FontAwesomeIcon icon={faSearch}/>
+        </button>
       </div>
 
       <FormPersona
