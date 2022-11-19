@@ -5,6 +5,7 @@ const FormCancha = (props)=> {
     
     const{show, close, valor, modoAgregar, onAgregar, onEditar} = props;
 
+
     const[deportes, setDeportes] = useState([]);
     
     const[complejos, setComplejos] = useState([]);
@@ -13,6 +14,10 @@ const FormCancha = (props)=> {
     const [formValues, setFormValues] = useState(valor);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
+
+    const horarios = ["12:00","13:00","14:00","15:00","16:00","17:00",
+    "18:00","19:00","20:00","21:00","22:00","23:00","24:00"]
+
 
 
     useEffect(() => {
@@ -75,7 +80,7 @@ const FormCancha = (props)=> {
       const validate = (formValues) => {
         console.log(formValues.deporteId);
         const errors = {};
-        const regex = /^[a-zA-Z]+[a-zA-Z]+$/g;
+        const regex = /(?:(\w+-?\w+)) (?:(\w+))(?: (\w+))?$/g;
         if(!formValues.deporteId){
           errors.deporteId = "Deporte es requerido"
         }
@@ -106,9 +111,15 @@ const FormCancha = (props)=> {
 
     return (
 
-        <Modal show={show} onHide={close}>
+        <Modal show={show} onHide={() => {
+                                    close()
+                                    setFormErrors({})
+                                    setIsSubmit(false)
+                                    }
+                                }
+        >
                 <Modal.Header closeButton>
-                    <Modal.Title>Nueva Cancha</Modal.Title>
+                    <Modal.Title>{modoAgregar? "Nueva Cancha" : "Editar Cancha"} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 
@@ -188,24 +199,31 @@ const FormCancha = (props)=> {
                     </Row>
 
                     <Row className="mb-3">
-                        <Form.Group as={Col} >
-                            <Form.Label>hora inicio</Form.Label>
-                            <Form.Control
-                                name="hora_inicio" 
-                                type="time" 
-                                value={formValues.hora_inicio}
-                                onChange={(e) => setFormValues({...formValues, hora_inicio: e.target.value})}
-                            />
+
+                        <Form.Group as={Col} controlId="formGridEmail">
+                            <Form.Label>Hora de Inicio</Form.Label>
+                            <Form.Select  onChange={(e) => {console.log(e.target.value);setFormValues({...formValues, hora_inicio: e.target.value})}} name="hora_inicio">
+                                {modoAgregar? <option hidden selected value="">...Elegir</option> : <option hidden selected value={formValues.hora_inicio}>{formValues.hora_inicio}</option> } 
+                                { 
+                                    horarios.map((horario, index) => (
+                                        <option key={index} value={horario}>{horario}</option>
+                                ))
+                                }
+                            </Form.Select>
                             <span style={{color: "red"}}>{formErrors.hora_inicio}</span>
                         </Form.Group>
-                        <Form.Group as={Col} >
-                            <Form.Label>hora fin</Form.Label>
-                            <Form.Control
-                                name="hora_fin" 
-                                type="time" 
-                                value={formValues.hora_fin}
-                                onChange={(e) => setFormValues({...formValues, hora_fin: e.target.value})}
-                            />
+
+                        
+                        <Form.Group as={Col} controlId="formGridPassword">
+                            <Form.Label>Hora Fin</Form.Label>
+                            <Form.Select  onChange={(e) => {console.log(e.target.value);setFormValues({...formValues, hora_fin: e.target.value})}} name="hora_fin">
+                                {modoAgregar? <option hidden selected value="">...Elegir</option> : <option hidden selected value={formValues.hora_fin}>{formValues.hora_fin}</option> } 
+                                { 
+                                    horarios.map((horario, index) => (
+                                        <option key={index} value={horario}>{horario}</option>
+                                ))
+                                }
+                            </Form.Select>
                             <span style={{color: "red"}}>{formErrors.hora_fin}</span>
                         </Form.Group>
                     </Row>

@@ -68,31 +68,36 @@ const FormDeporte = (props)=>{
     };
     
     return(
-      <Modal show={show} onHide={close}>
-      <Modal.Header closeButton>
-        <Modal.Title>Nuevo Deporte</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>Deporte</Form.Label>
-            <Form.Control
-              value = {`${formValues.descripcion}`}
-              type= "text"
-              name="descripcion"
-              placeholder="ej:tenis"
-              autoFocus
-              onChange={handleChange}
-            />
-            <span style={{color: "red"}}>{formErrors.descripcion}</span>
-          </Form.Group>
-          
-          
-          <Button variant="primary" type="submit">Aceptar</Button>
-  
-        </Form>
-      </Modal.Body>
-    </Modal>
+      <Modal show={show} onHide={() => {
+                                        close()
+                                        setFormErrors({})
+                                        setIsSubmit(false)
+                                        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{modoAgregar? "Nuevo Deporte" : "Editar Deporte"} </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Deporte</Form.Label>
+              <Form.Control
+                value = {`${formValues.descripcion}`}
+                type= "text"
+                name="descripcion"
+                placeholder="ej:tenis"
+                autoFocus
+                onChange={handleChange}
+              />
+              <span style={{color: "red"}}>{formErrors.descripcion}</span>
+            </Form.Group>
+            
+            
+            <Button variant="primary" type="submit">Aceptar</Button>
+    
+          </Form>
+        </Modal.Body>
+      </Modal>
     )
 } 
 

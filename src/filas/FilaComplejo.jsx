@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 
-const FilaCancha = (props)=> {
-    const {onEditar, onEliminar, cancha, index} = props;
+const FilaComplejo = (props)=> {
+    const {onEditar, onEliminar, complejo, index} = props;
 
     const [show, setShow] = useState(false);
 
@@ -21,12 +21,12 @@ const FilaCancha = (props)=> {
                         <FontAwesomeIcon icon={faCircleExclamation}  style={{color:"red"}} size='lg'/>
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Estas seguro que deseas eliminar <strong>{cancha.descripcion}</strong>?</Modal.Body>
+                <Modal.Body>Estas seguro que deseas eliminar <strong>{complejo.denominacion}</strong>?</Modal.Body>
                 <Modal.Footer style={{alignItems: "center", justifyContent:'center'}}>
                     <Button title='Cancelar' variant="outline-secondary" size='lg' onClick={handleClose}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </Button>
-                    <Button title='Aceptar' variant="outline-success" size='lg' onClick={() => {handleClose(); onEliminar(cancha)}}>
+                    <Button title='Aceptar' variant="outline-success" size='lg' onClick={() => {handleClose(); onEliminar(complejo)}}>
                         <FontAwesomeIcon icon={faCircleCheck} />
                     </Button>
                 </Modal.Footer>
@@ -36,37 +36,24 @@ const FilaCancha = (props)=> {
                     {index + 1}
                 </td>
                 <td >
-                    <p>{cancha.descripcion}</p> 
+                    <p>{complejo.denominacion}</p> 
                 </td>
                 <td>
-                    {cancha.complejo.denominacion}
+                    {complejo.domicilio}
                 </td>
                 <td>
-                    {cancha.deporte.descripcion}
+                    {complejo.encargado}
+                </td>
+                
+                <td>
+                    {complejo.dni}
                 </td>
                 <td>
-                    {cancha.estado? <span className="badge bg-success">Activa</span>:<span className="badge bg-danger">Inactiva</span>}
+                    {complejo.fechaAlta}
                 </td>
+                
                 <td>
-                    {cancha.hora_inicio}
-                </td>
-                <td>
-                    {cancha.hora_fin}
-                </td>
-                <td>
-                    {cancha.tipoPisp}
-                </td>
-                <td>
-                    {cancha.iluminacion? "SI":"NO"}
-                </td>
-                <td>
-                    {cancha.techada? "SI":"NO"}
-                </td>
-                <td>
-                    {"$"}{cancha.precioh}
-                </td>
-                <td>
-                    <Button onClick={() => onEditar(cancha)} variant="outline-success" title="Editar"><FontAwesomeIcon icon={faPenAlt} /></Button>
+                    <Button onClick={() => onEditar(complejo)} variant="outline-success" title="Editar"><FontAwesomeIcon icon={faPenAlt} /></Button>
                     {" "}
                     <Button  variant="outline-danger" title="Eliminar" onClick={handleShow}><FontAwesomeIcon icon={faTrash} /></Button>
                 </td>
@@ -75,4 +62,4 @@ const FilaCancha = (props)=> {
     )
 }
 
-export default FilaCancha;
+export default FilaComplejo;
