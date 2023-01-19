@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Button, Table, Container} from 'react-bootstrap';
+import { Button, Container} from 'react-bootstrap';
 import FormAlquiler from "../forms/FormAlquiler";
-import FilaAlquiler from "../filas/FilaAlquiler";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import TableAlquiler from "../table/TableAlquiler";
+import AdvancedExample from "../components/pagination";
 
 
 
@@ -34,17 +35,25 @@ const Alquileres = ()=>{
 
     const [alquilerElegido, setAlquilerElegido] = useState(valorInicial);
     
+    const [page, setPage ] = useState(0)
     
+    //En relacion a la paginacion 
+    const totalAlquileres = alquileres.length
+    const [alquileresPerPage, setAlquileresPerPage] = useState(5)
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const lastIndex = currentPage * alquileresPerPage
+    const firstIndex = lastIndex - alquileresPerPage
     
     
     useEffect(() => {
-        fetch("http://localhost:4000/alquileres").then((respuesta) => {
-          respuesta.json().then((getAlquileres) => {
-  
+        fetch(`http://localhost:4000/alquileres`)
+        .then((respuesta) => {
+          respuesta.json()
+          .then((getAlquileres) => {
+            console.log(getAlquileres);
             setAlquileres([...getAlquileres]);
             setTablaAlquileres([...getAlquileres]);
-            console.log(getAlquileres);
-
           });
         });
       },[open]);
@@ -171,39 +180,25 @@ const Alquileres = ()=>{
             onAgregar= {agregarAlquiler}
             onEditar= {editarAlquiler}
             />
-
-              <Container >
-                <Table striped bordered hover className='canchas-lista-contenedor'>
-                    <thead>
-                    <tr style={{backgroundColor:'gray'}}>
-                        <th>#</th>
-                        <th>Cancha</th>
-                        <th>Persona</th>
-                        <th>Hora Inicio</th>
-                        <th>Hora Fin</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                        <th>Acciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    { alquileres.map((alquiler, index)=> (
-                      <FilaAlquiler
-                        alquiler = {alquiler}
-                        key= {alquiler.id}
-                        index = {index}
-                        onEliminar = {eliminarAlquiler}
-                        onEditar = {(alquiler) => {
-                          setModoAgregar(false);
-                          setShow(true);
-                          setAlquilerElegido(alquiler)
-                        }}
-                      />
-                      ))
-                    }
-                    </tbody>
-                </Table>
-              </Container >
+              
+            <Container style={{minHeight:"100%"}}>
+                <TableAlquiler
+                alquileres={alquileres}
+                eliminarAlquiler={eliminarAlquiler}
+                setModoAgregar={setModoAgregar}
+                setShow={setShow}
+                setAlquilerElegido={setAlquilerElegido}
+                lastIndex={lastIndex}
+                firstIndex={firstIndex}
+                />
+                <AdvancedExample
+                  alquileres={alquileres}
+                  alquileresPerPage={alquileresPerPage}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalAlquileres={totalAlquileres}
+                />
+            </Container >
         </>
     )
 }

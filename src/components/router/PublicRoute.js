@@ -7,7 +7,6 @@ export default function PublicRoute() {
     if (isAuthenticated){
         return <Navigate to={PRIVATE} />
     }
-
     return(
         <div>
             <Outlet />

@@ -10,6 +10,8 @@ import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 
 function BarraNavegacion() {
 
+  const name = localStorage.getItem("MY_AUTH_APP");
+
   return (
     <>  
       <Navbar bg="primary" variant="dark">
@@ -48,11 +50,11 @@ function BarraNavegacion() {
                     </Popover>
                   }
                 >
-                  <Button variant="outline-secondary" style={{borderRadius: '30px', color: 'white'}}><FontAwesomeIcon icon={faUserTie} /></Button>
+                  <Button variant="outline-secondary" style={{borderRadius: '30px', color: 'white'}}><FontAwesomeIcon icon={faUserTie} /> {name} </Button>
                 </OverlayTrigger>
               </Nav>
             </Col>
-       
+
         </Container>
       </Navbar>
     

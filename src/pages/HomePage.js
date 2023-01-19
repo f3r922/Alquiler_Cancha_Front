@@ -3,8 +3,8 @@ import imagenDeportes from '../imagen/deportes.jpg'
 
 export const HomePage = () => {
     return(
-      <Container className="tarjeta">
-        <Card bg="ight" border="primary" style={{ width: '400px', padding:'10px' }}>
+      <Container className="tarjeta" style={{ width: '100%' }}>
+        <Card bg="ight" border="primary" >
           <Card.Img  src={imagenDeportes} />
           <Card.Body>
             <Card.Title> Soft-canchas</Card.Title>

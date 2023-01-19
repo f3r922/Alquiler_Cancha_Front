@@ -2,16 +2,13 @@ import { createContext, useCallback, useContext, useMemo, useState } from "react
 import PropTypes from 'prop-types';
 import axios from "axios";
 
-const MY_AUTH_APP = 'MY_AUTH_APP_1'
-
 export const AuthContext = createContext();
 
 export function AuthContextProvider( {children} ){
     
-    const [isAuthenticated, setIsAuthenticated] = useState(window.localStorage.getItem(MY_AUTH_APP) ?? false);
+    const [isAuthenticated, setIsAuthenticated] = useState(window.localStorage.getItem('MY_AUTH_APP'));
     
     const login = useCallback( async function(usuario, password){
-     
     
         const response = await axios.post("http://localhost:4000/auth/login", {
         usuario,
@@ -19,14 +16,15 @@ export function AuthContextProvider( {children} ){
         });
         console.log(response)
         if (response.data.token) {
-            window.localStorage.setItem(MY_AUTH_APP, true);
+            window.localStorage.setItem('MY_AUTH_APP', response.data.usuario);
+            console.log(response.data);
             setIsAuthenticated(response.data);
         }
 
     }, [])
 
     const logout = useCallback(function(){
-        window.localStorage.removeItem(MY_AUTH_APP);
+        window.localStorage.removeItem('MY_AUTH_APP');
     
         setIsAuthenticated(null);
     }, [])
